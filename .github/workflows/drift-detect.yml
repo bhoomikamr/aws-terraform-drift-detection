@@ -38,8 +38,10 @@ jobs:
           working-directory: ./terraform
           run: |
             terraform init
+            set +e
             terraform plan -detailed-exitcode
             echo "status=$?" >> $GITHUB_OUTPUT
+            set -e
 
         - name: Open GitHub issue if drift present
           
