@@ -43,7 +43,7 @@ jobs:
             echo "status=$?" >> $GITHUB_OUTPUT
 
         - name: Open GitHub issue if drift present
-          if: steps.drift_check.outputs.result == '2'
+          if: steps.drift_check.outputs.status == '2'
           run: |
             gh issue create --title "Infrastructure drift detected" \
             --body "Drift detector found the desired state is not equal to the current state. Please review the logs and decide if we should update the code or revert the AWS change."
