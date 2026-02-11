@@ -33,7 +33,6 @@ jobs:
           uses: hashicorp/setup-terraform@v3
 
         - name: Drift check
-        
           id: drift_check
           continue-on-error: true
           working-directory: ./terraform
@@ -43,14 +42,13 @@ jobs:
             echo "status=$?" >> $GITHUB_OUTPUT
 
         - name: Open GitHub issue if drift present
+          
           if: steps.drift_check.outputs.status == '2'
           run: |
             gh issue create --title "Infrastructure drift detected" \
-            --body "Drift detector found the desired state is not equal to the current state. Please review the logs and decide if we should update the code or revert the AWS change."
+            --body "Drift detector found changes. Review the logs to decide if you should update the code or revert the AWS change."
           env: 
-            GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-
-
+            GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
             
 
