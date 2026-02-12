@@ -16,6 +16,10 @@ resource "aws_launch_template" "template" {
 
   vpc_security_group_ids = [aws_security_group.ec2_sg.id]
 
+ lifecycle {
+  ignore_changes = [user_data]
+  }
+
   user_data = base64encode(<<EOF
 #!/bin/bash
 sudo yum update -y
