@@ -43,7 +43,10 @@ jobs:
             DRIFT_CODE=$?
             set -e
             echo "status=$DRIFT_CODE" >> $GITHUB_OUTPUT
-            
+            echo "Captured exit code: ${DRIFT_CODE}"
+
+        - name: Debug output
+          run: echo "Drift status is ${{ steps.drift_check.outputs.status }}"
 
         - name: Open GitHub issue if drift present
           
