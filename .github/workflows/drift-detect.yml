@@ -40,9 +40,10 @@ jobs:
             terraform init
             set +e
             terraform plan -detailed-exitcode
-            echo "status=$?" >> $GITHUB_OUTPUT
+            DRIFT_CODE=$?
             set -e
-            echo "DEBUG: Captured exit code is $DRIFT_CODE"
+            echo "status=$DRIFT_CODE" >> $GITHUB_OUTPUT
+            
 
         - name: Open GitHub issue if drift present
           
