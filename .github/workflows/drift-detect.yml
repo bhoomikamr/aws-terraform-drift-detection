@@ -1,4 +1,4 @@
-name: 'Drfit Detector'
+name: 'Drift Detector'
 
 on:
     schedule:
@@ -32,17 +32,17 @@ jobs:
         - name: Terraform setup
           uses: hashicorp/setup-terraform@v3
           with:
-            terraform_wrapper: false
+            terraform_wrapper: true
       
         - name: Drift check
           id: drift_check
-          continue-on-error: true # Essential so the workflow doesn't stop here
+          continue-on-error: true 
           working-directory: ./terraform
           run: |
             terraform init
             terraform plan -detailed-exitcode
             # Capture the exit code of the plan command specifically
-            echo "plan_exit_code=$?" >> $GITHUB_OUTPUT
+            # echo "plan_exit_code=$?" >> $GITHUB_OUTPUT
 
         - name: Open GitHub issue if drift present
           # Check for exit code 2 (Drift) or 1 (Error)
