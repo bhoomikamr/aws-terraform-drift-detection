@@ -46,7 +46,7 @@ jobs:
 
         - name: Open GitHub issue if drift present
           # Check for exit code 2 (Drift) or 1 (Error)
-          if: steps.drift_check.outputs.plan_exit_code == '2'
+          if: steps.drift_check.outputs.exitcode == '2'
           run: |
             gh issue create \
             --title "Infrastructure drift detected" \
