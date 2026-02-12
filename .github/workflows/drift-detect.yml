@@ -1,4 +1,4 @@
-name: 'Drfit Detector'
+name: 'Drift Detector'
 
 on:
     schedule:
@@ -9,8 +9,10 @@ on:
 
 permissions:
 
+    id-token: write
     contents: read
     issues: write
+    
 
 jobs:
     drift_checker:
@@ -25,35 +27,32 @@ jobs:
         - name: AWS login
           uses: aws-actions/configure-aws-credentials@v4
           with:
-            aws_access_key_id: ${{secrets.AWS_ACCESS_KEY_ID}}
-            aws_secret_access_key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
-            aws_region: us-east-1
+            role-to-assume: ${{secrets.AWS_ROLE_ARN}}
+            region: us-east-1
         
         - name: Terraform setup
           uses: hashicorp/setup-terraform@v3
-
+          
+      
         - name: Drift check
-        
           id: drift_check
-          continue-on-error: true
+          continue-on-error: true 
           working-directory: ./terraform
           run: |
             terraform init
             terraform plan -detailed-exitcode
-            echo "status=$?" >> $GITHUB_OUTPUT
 
         - name: Open GitHub issue if drift present
-          if: steps.drift_check.outputs.result == '2'
+          # Check for exit code 2 (Drift) or 1 (Error)
+          if: steps.drift_check.outputs.exitcode == '2'
           run: |
-            gh issue create --title "Infrastructure drift detected" \
-            --body "Drift detector found the desired state is not equal to the current state. Please review the logs and decide if we should update the code or revert the AWS change."
-          env: 
-            GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-
-
+            gh issue create \
+            --title "Infrastructure drift detected" \
+            --body "Drift detected by Terraform plan. Manual intervention required."
+          env:
+            GH_TOKEN: ${{ github.token }}
 
             
-
 
 
 
