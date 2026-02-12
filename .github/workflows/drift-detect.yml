@@ -33,30 +33,24 @@ jobs:
           uses: hashicorp/setup-terraform@v3
           with:
             terraform_wrapper: false
-
         - name: Drift check
           id: drift_check
           continue-on-error: true
           working-directory: ./terraform
           run: |
             terraform init
-            set +e
             terraform plan -detailed-exitcode
-            DRIFT_CODE=$?
-            set -e
-            echo "status=$DRIFT_CODE" >> $GITHUB_OUTPUT
-            echo "Captured exit code: ${DRIFT_CODE}"
 
         - name: Debug output
           run: echo "Drift status is ${{ steps.drift_check.outputs.status }}"
-
-        - name: Open GitHub issue if drift present
           
-          if: steps.drift_check.outputs.status == '2'
+        - name: Open GitHub issue if drift present
+          if: steps.drift_check.outcome == 'failure'
           run: |
-            gh issue create --title "Infrastructure drift detected" \
-            --body "Drift detector found changes. Review the logs to decide if you should update the code or revert the AWS change."
-          env: 
+            gh issue create \
+            --title "Infrastructure drift detected" \
+              --body "Drift detected by Terraform plan."
+          env:
             GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
             
