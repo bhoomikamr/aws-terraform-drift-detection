@@ -31,6 +31,8 @@ jobs:
         
         - name: Terraform setup
           uses: hashicorp/setup-terraform@v3
+          with:
+            terraform_wrapper: false
 
         - name: Drift check
           id: drift_check
