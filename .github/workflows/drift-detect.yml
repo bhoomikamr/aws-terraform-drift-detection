@@ -41,11 +41,11 @@ jobs:
             terraform init
             terraform plan -detailed-exitcode
             # Capture the exit code of the plan command specifically
-            # echo "plan_exit_code=$?" >> $GITHUB_OUTPUT
+            echo "status=$?" >> $GITHUB_OUTPUT
 
         - name: Open GitHub issue if drift present
           # Check for exit code 2 (Drift) or 1 (Error)
-          if: steps.drift_check.outputs.exitcode == '2'
+          if: steps.drift_check.outputs.status == '2'
           run: |
             gh issue create \
             --title "Infrastructure drift detected" \
