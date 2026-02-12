@@ -51,7 +51,7 @@ jobs:
             --title "Infrastructure drift detected" \
               --body "Drift detected by Terraform plan."
           env:
-            GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            GH_TOKEN: ${{github.token}}
 
             
 
