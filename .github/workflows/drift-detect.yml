@@ -33,25 +33,26 @@ jobs:
           uses: hashicorp/setup-terraform@v3
           with:
             terraform_wrapper: false
+      
         - name: Drift check
           id: drift_check
-          continue-on-error: true
+          continue-on-error: true # Essential so the workflow doesn't stop here
           working-directory: ./terraform
           run: |
             terraform init
             terraform plan -detailed-exitcode
+            # Capture the exit code of the plan command specifically
+            echo "plan_exit_code=$?" >> $GITHUB_OUTPUT
 
-        - name: Debug output
-          run: echo "Drift status is ${{ steps.drift_check.outputs.status }}"
-          
         - name: Open GitHub issue if drift present
-          if: steps.drift_check.outcome == 'failure'
+          # Check for exit code 2 (Drift) or 1 (Error)
+          if: steps.drift_check.outputs.plan_exit_code == '2'
           run: |
             gh issue create \
             --title "Infrastructure drift detected" \
-              --body "Drift detected by Terraform plan."
+            --body "Drift detected by Terraform plan. Manual intervention required."
           env:
-            GH_TOKEN: ${{github.token}}
+            GH_TOKEN: ${{ github.token }}
 
             
 
