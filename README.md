@@ -66,7 +66,7 @@ aws-terraform-drift-detection/
 │   └── vpc.tf
 │
 └── README.md
-
+```
 Prerequisites
 
 Before running this project, ensure you have:
