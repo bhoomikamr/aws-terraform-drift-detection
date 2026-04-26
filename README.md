@@ -143,16 +143,6 @@ State locking in DynamoDB
 
 No long-term AWS keys are stored in GitHub.
 
-**Example Use Cases**
-
-Useful for:
-
-DevOps portfolio projects
-Infrastructure compliance monitoring
-Terraform governance
-Production drift monitoring
-Cloud automation demonstrations
-
 **Technologies Used**
 
 - Terraform
