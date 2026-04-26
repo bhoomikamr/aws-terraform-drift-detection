@@ -67,7 +67,7 @@ aws-terraform-drift-detection/
 │
 └── README.md
 ```
-**Prerequisites**
+## Prerequisites
 
 Before running this project, ensure you have:
 
@@ -76,41 +76,49 @@ AWS CLI configured
 GitHub repository secrets configured
 AWS IAM role for GitHub OIDC authentication
 
-**Required GitHub Secret**
+## Required GitHub Secret
 
 Add this secret in your GitHub repository:
-```
+```bash
 AWS_ROLE_ARN
 ```
 This IAM role allows GitHub Actions to access AWS securely.
 
-**Deployment**
+## Deployment
 
 Initialize Terraform:
 
-```terraform init```
+```bash 
+terraform init
+```
 
 Validate configuration:
 
-```terraform validate```
+```bash
+terraform validate
+```
 
 Preview infrastructure:
 
-```terraform plan```
+```bash
+terraform plan
+```
 
 Deploy infrastructure:
 
-```terraform apply```
+```bash
+terraform apply
+```
 
-**Drift Detection Workflow**
+## Drift Detection Workflow
 
 GitHub Actions executes:
-```
+```bash
 terraform init
 terraform plan -detailed-exitcode
 ```
 
-**Terraform exit codes:**
+## Terraform exit codes:
 
 Exit Code	| Meaning
 |-----------|------------|
@@ -124,7 +132,7 @@ GitHub creates an issue
 Team is notified
 Manual review can begin
 
-**Example GitHub Issue**
+## Example GitHub Issue
 ```
 Infrastructure drift detected
 
@@ -132,7 +140,7 @@ Drift detected by Terraform plan.
 Manual intervention required.
 ```
 
-**Security**
+## Security
 
 This project uses:
 
@@ -143,7 +151,7 @@ State locking in DynamoDB
 
 No long-term AWS keys are stored in GitHub.
 
-**Technologies Used**
+## Technologies Used
 
 - Terraform
 - AWS
@@ -155,7 +163,7 @@ No long-term AWS keys are stored in GitHub.
 - S3
 - DynamoDB
 
-**Future Improvements**
+## Future Improvements
 
 Possible enhancements:
 
