@@ -65,6 +65,7 @@ aws-terraform-drift-detection/
 │   ├── variables.tf
 │   └── vpc.tf
 │
+│── .gitignore
 └── README.md
 ```
 ## Prerequisites
@@ -144,10 +145,10 @@ Manual intervention required.
 
 This project uses:
 
-GitHub OIDC authentication
-Temporary AWS credentials
-Remote encrypted state in S3
-State locking in DynamoDB
+- GitHub OIDC authentication
+- Temporary AWS credentials
+- Remote encrypted state in S3
+- State locking in DynamoDB
 
 No long-term AWS keys are stored in GitHub.
 
