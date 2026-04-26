@@ -67,7 +67,7 @@ aws-terraform-drift-detection/
 │
 └── README.md
 ```
-Prerequisites
+**Prerequisites**
 
 Before running this project, ensure you have:
 
@@ -76,45 +76,47 @@ AWS CLI configured
 GitHub repository secrets configured
 AWS IAM role for GitHub OIDC authentication
 
-Required GitHub Secret
+**Required GitHub Secret**
 
 Add this secret in your GitHub repository:
-
+```
 AWS_ROLE_ARN
-
+```
 This IAM role allows GitHub Actions to access AWS securely.
 
-Deployment
+**Deployment**
 
 Initialize Terraform:
 
-terraform init
+```terraform init```
 
 Validate configuration:
 
-terraform validate
+```terraform validate```
 
 Preview infrastructure:
 
-terraform plan
+```terraform plan```
 
 Deploy infrastructure:
 
-terraform apply
+```terraform apply```
 
-Drift Detection Workflow
+**Drift Detection Workflow**
 
 GitHub Actions executes:
-
+```
 terraform init
 terraform plan -detailed-exitcode
+```
 
-Terraform exit codes:
+**Terraform exit codes:**
 
-Exit Code	Meaning
-0	No changes
-1	Error
-2	Drift detected
+Exit Code	| Meaning
+|-----------|------------|
+ 0	         | No changes
+ 1	         | Error
+ 2	         | Drift detected
 
 When exit code 2 occurs:
 
@@ -122,12 +124,15 @@ GitHub creates an issue
 Team is notified
 Manual review can begin
 
-Example GitHub Issue
+**Example GitHub Issue**
+```
 Infrastructure drift detected
 
 Drift detected by Terraform plan.
 Manual intervention required.
-Security
+```
+
+**Security**
 
 This project uses:
 
@@ -138,7 +143,7 @@ State locking in DynamoDB
 
 No long-term AWS keys are stored in GitHub.
 
-Example Use Cases
+**Example Use Cases**
 
 Useful for:
 
@@ -148,18 +153,19 @@ Terraform governance
 Production drift monitoring
 Cloud automation demonstrations
 
-Technologies Used
-Terraform
-AWS
-GitHub Actions
-IAM OIDC
-EC2
-ALB
-Auto Scaling
-S3
-DynamoDB
+**Technologies Used**
 
-Future Improvements
+-Terraform
+-AWS
+-GitHub Actions
+-IAM OIDC
+-EC2
+-ALB
+-Auto Scaling
+-S3
+-DynamoDB
+
+**Future Improvements**
 
 Possible enhancements:
 
@@ -168,13 +174,3 @@ Email alerts
 Auto-remediation
 Multi-environment support
 CloudWatch monitoring integration
-
-
-
-
-
-
-
-
-
-
