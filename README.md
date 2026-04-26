@@ -155,22 +155,22 @@ Cloud automation demonstrations
 
 **Technologies Used**
 
--Terraform
--AWS
--GitHub Actions
--IAM OIDC
--EC2
--ALB
--Auto Scaling
--S3
--DynamoDB
+- Terraform
+- AWS
+- GitHub Actions
+- IAM OIDC
+- EC2
+- ALB
+- Auto Scaling
+- S3
+- DynamoDB
 
 **Future Improvements**
 
 Possible enhancements:
 
-Slack notifications
-Email alerts
-Auto-remediation
-Multi-environment support
-CloudWatch monitoring integration
+- Slack notifications
+- Email alerts
+- Auto-remediation
+- Multi-environment support
+- CloudWatch monitoring integration
