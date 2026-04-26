@@ -1,8 +1,9 @@
-AWS Terraform Drift Detection
+# AWS Terraform Drift Detection
 
 Automated infrastructure drift detection for AWS resources using **Terraform** and **GitHub Actions**.
 
-This project provisions AWS infrastructure with Terraform and automatically checks for configuration drift between the deployed AWS resources and the Terraform state file.  
+This project provisions AWS infrastructure with Terraform and automatically checks for configuration drift between deployed AWS resources and the Terraform state file.
+
 If drift is detected, a GitHub issue is automatically created for visibility and remediation.
 
 ---
@@ -14,11 +15,11 @@ If drift is detected, a GitHub issue is automatically created for visibility and
 - Auto Scaling Group (ASG)
 - Launch Template for EC2 instances
 - Custom VPC with public/private subnets
-- Security Groups configuration
+- Security group configuration
 - Remote Terraform state in S3
 - State locking with DynamoDB
 - Automated drift detection using GitHub Actions
-- Automatic GitHub issue creation when drift is found
+- Automatic GitHub issue creation when drift is detected
 
 ---
 
@@ -26,23 +27,23 @@ If drift is detected, a GitHub issue is automatically created for visibility and
 
 The infrastructure includes:
 
-- **VPC**
-- **Public and Private Subnets**
-- **Application Load Balancer**
-- **EC2 Instances**
-- **Auto Scaling Group**
-- **Terraform Remote Backend**
-- **GitHub Actions CI/CD**
+- VPC
+- Public and private subnets
+- Application Load Balancer
+- EC2 instances
+- Auto Scaling Group
+- Terraform remote backend
+- GitHub Actions CI/CD workflow
 
-Workflow:
+### Workflow
 
-1. Terraform provisions AWS infrastructure
-2. GitHub Actions runs `terraform plan`
+1. Terraform provisions AWS infrastructure  
+2. GitHub Actions runs `terraform plan`  
 3. Terraform compares:
    - actual AWS resources
-   - Terraform state
+   - Terraform state  
 4. If differences are found:
-   - GitHub issue is created automatically
+   - a GitHub issue is created automatically  
 
 ---
 
