@@ -71,10 +71,10 @@ aws-terraform-drift-detection/
 
 Before running this project, ensure you have:
 
-Terraform installed
-AWS CLI configured
-GitHub repository secrets configured
-AWS IAM role for GitHub OIDC authentication
+- Terraform installed
+- AWS CLI configured
+- GitHub repository secrets configured
+- AWS IAM role for GitHub OIDC authentication
 
 ## Required GitHub Secret
 
@@ -122,15 +122,15 @@ terraform plan -detailed-exitcode
 
 Exit Code	| Meaning
 |-----------|------------|
- 0	         | No changes
- 1	         | Error
- 2	         | Drift detected
+| 0 | No changes |
+| 1 | Error |
+| 2 | Drift detected |
 
 When exit code 2 occurs:
 
-GitHub creates an issue
-Team is notified
-Manual review can begin
+- GitHub creates an issue
+- Team is notified
+- Manual review can begin
 
 ## Example GitHub Issue
 ```
